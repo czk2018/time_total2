@@ -33,15 +33,15 @@ public class GlobalDefs {
 
 	// 内部错误码
 	// 需终止线程的错误，-1 ~ -30
-	public int ERR_WTIMEOUT  = -1;
-	public int ERR_TERMINATE = -2;
-	public int ERR_PACKET    = -3;
-	public int ERR_NETWORK   = -4;
-	public int ERR_SOCKRECV  = -5;
-	public int ERR_SOCKSEND  = -6;
-	public int ERR_CONNECT  = -10;
-	public int ERR_RTIMEOUT  = -11;
-	public int ERR_DISCONNECT  = -29;
+	public static int ERR_WTIMEOUT  = -1;
+	public static int ERR_TERMINATE = -2;
+	public static int ERR_PACKET    = -3;
+	public static int ERR_NETWORK   = -4;
+	public static int ERR_SOCKRECV  = -5;
+	public static int ERR_SOCKSEND  = -6;
+	public static int ERR_CONNECT  = -10;
+	public static int ERR_RTIMEOUT  = -11;
+	public static int ERR_DISCONNECT  = -29;
 
 	// 可继续处理请求的
 	public int ERR_CODEERROR = -91;
