@@ -52,19 +52,13 @@ public class Packet {
 	}
 	
 	public String GetTranCode() {
-		return String.valueOf(Data[0])
-				+ String.valueOf(Data[1])
-				+ String.valueOf(Data[2])
-				+ String.valueOf(Data[3]);
+		return Data[0] + "" + Data[1] + "" + Data[2] + "" + Data[3];
 	}
 	
 	public int Length() {
-		int high = Data[6] - '0';
-		high = high * 256;
-		int low = Data[5] - '0';
-		return high + low;
+		return (int) (Data[6] * 256 + Data[5]);
 	}
-	/*
+	
 	public int Append(String Value, int Len) {
 		int j = Length();
 		
@@ -77,5 +71,24 @@ public class Packet {
 		char low = (char) (Len % 256) & 0xff;
 		Data[j + 1] = (char) () + '0';
 		Data[j + 2] = Len / 256;
-	}*/
+	}
+	
+
+	public String strTo16(String s) {
+
+	    String str = "";
+
+	    for (int i = 0; i < s.length(); i++) {
+
+	        int ch = (int) s.charAt(i);
+
+	        String s4 = Integer.toHexString(ch);
+
+	        str = str + s4;
+
+	    }
+
+	    return str;
+
+	}
 }
