@@ -67,10 +67,25 @@ public class Packet {
 				|| (Len > GlobalDefs.MAXPACKETSIZE)) {
 			return GlobalDefs.ERR_PACKET;
 		}
+
+		int i_mod = Len % 256;
+		int i_div = Len / 256;
 		
-		char low = (char) (Len % 256) & 0xff;
-		Data[j + 1] = (char) () + '0';
-		Data[j + 2] = Len / 256;
+		Data[j + 1] = (char) (i_mod);
+		Data[j + 2] = (char) (i_div);
+		
+		for (int i = 0; i < Len; i++) {
+			Data[j + 2 + i] = Value.charAt(i);
+		}
+		
+		SetLen(j + Len + 2);
+		
+		return Len;
+	}
+	
+	public void SetLen(int Len) {
+		Data[5] = (char) (Len % 256);
+		Data[6] = (char) (Len / 256);
 	}
 	
 

@@ -29,6 +29,20 @@ public class Test {
 		
 		char c = (char) (c6 * 256 + c5);
 		System.out.println((int) c);
+		
+		js();
+	}
+	
+	public static void js() {
+
+		int len = 669;
+		
+		char i_mod = (char) (len % 256);
+		char i_div = (char) (len / 256);
+		
+		short ss = (short) (i_div * 256 + i_mod);
+		
+		System.out.println(ss);
 	}
 
 	public static String strTo16(String s) {
