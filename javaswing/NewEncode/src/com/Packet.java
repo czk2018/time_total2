@@ -74,6 +74,8 @@ public class Packet {
 		Data[j + 1] = (char) (i_mod);
 		Data[j + 2] = (char) (i_div);
 		
+		FieldPtrs.add(j + 1);
+		
 		for (int i = 0; i < Len; i++) {
 			Data[j + 2 + i] = Value.charAt(i);
 		}
@@ -83,9 +85,39 @@ public class Packet {
 		return Len;
 	}
 	
+	public int GetValue(StringBuffer Value, final int Fieldno) {
+		if (Fieldno > FieldPtrs.size()) {
+			return 0;
+		}
+		
+		int j = Length();
+		
+		if (j > GlobalDefs.MAXPACKETSIZE || Fieldno < 1) {
+			return GlobalDefs.ERR_PACKET;
+		}
+		
+		int pos = FieldPtrs.get(Fieldno - 1);
+		
+		j = FieldLength(Fieldno);
+		
+		for (int k = 0; k < j; k++) {
+			Value.append(Data[pos + 1 + k]);
+		}
+		
+		return j;
+	}
+	
 	public void SetLen(int Len) {
 		Data[5] = (char) (Len % 256);
 		Data[6] = (char) (Len / 256);
+	}
+	
+	public int FieldLength(int Fieldno) {
+		if (Fieldno < 1 || FieldPtrs.size() < Fieldno) {
+			return -1;
+		}
+		
+		return (int) (Data[FieldPtrs.get(Fieldno-1)+1]*256 + Data[FieldPtrs.get(Fieldno-1)]);
 	}
 	
 

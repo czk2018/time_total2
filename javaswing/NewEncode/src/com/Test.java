@@ -31,6 +31,16 @@ public class Test {
 		System.out.println((int) c);
 		
 		js();
+		
+		StringBuffer sb = new StringBuffer();
+		
+		String sb1 = "";
+		get(sb1);
+		System.out.println(sb.toString());
+	}
+	
+	public static void get(String sb) {
+		sb = "hello";
 	}
 	
 	public static void js() {
