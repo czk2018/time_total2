@@ -44,18 +44,18 @@ public class GlobalDefs {
 	public static int ERR_DISCONNECT  = -29;
 
 	// 可继续处理请求的
-	public int ERR_CODEERROR = -91;
-	public int ERR_NODATA = -94;
-	public int ERR_DATAERROR = -95;
-	public int ERR_NOTALLOW = -96;
-	public int ERR_RECTOOLONG = -97;
-	public int ERR_PASSWORD = -98;
-	public int ERR_BREAK  = -99;
+	public static int ERR_CODEERROR = -91;
+	public static int ERR_NODATA = -94;
+	public static int ERR_DATAERROR = -95;
+	public static int ERR_NOTALLOW = -96;
+	public static int ERR_RECTOOLONG = -97;
+	public static int ERR_PASSWORD = -98;
+	public static int ERR_BREAK  = -99;
 
-	public int ERR_DATETIME = -85;
-	public int ERR_RMTERROR  = -86;
+	public static int ERR_DATETIME = -85;
+	public static int ERR_RMTERROR  = -86;
 
-	public int ERR_OTHERERROR  = -99;
+	public static int ERR_OTHERERROR  = -99;
 
 	// TeleCode: array[1..10000] of string; // chinese 2bytes chars
 	public String[] TeleCode = new String[10001];
