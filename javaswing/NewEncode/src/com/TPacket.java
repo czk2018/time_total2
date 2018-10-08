@@ -3,7 +3,7 @@ package com;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Packet {
+public class TPacket {
 	//public byte[] TBytes = new byte[GlobalDefs.MAXPACKETSIZE];
 	//public byte[] Data = new byte[GlobalDefs.MAXPACKETSIZE];
 	
@@ -13,7 +13,7 @@ public class Packet {
 	public List<Integer> FieldPtrs = new ArrayList<Integer>();
 	
 	public static void main(String[] args) {
-		Packet p = new Packet();
+		TPacket p = new TPacket();
 		p.Init("1234");
 		System.out.println(p.GetTranCode() + ", " + p.Length());
 
@@ -456,8 +456,73 @@ public class Packet {
 		return GetTFValByName1(Value, TranFieldName, fldval.toString(), mvno, subno);
 	}
 	
-	public int GetEnqRecord() {
+	//var Value:string;const sno:integer;const PackFieldno:integer=4
+	public int GetEnqRecord(StringBuffer Value, final int sno, final int PackFieldno) {
+		int i,j,k,l,qflag;
+		StringBuffer tmpstr = new StringBuffer();
+		StringBuffer pfldval = new StringBuffer();
 		
+		Value.setLength(0);
+		
+		int ret = 0;
+		if (0 > (ret = this.GetValue(pfldval, PackFieldno))) {
+			return ret;
+		}
+		if (ret == 0) {
+			return GlobalDefs.ERR_NODATA;
+		}
+		
+		l = ret;
+		
+		try {
+			i = GetValue(tmpstr, 3);
+			if (i <= 0 || sno <= 0 || sno > Integer.parseInt(tmpstr.toString())) {
+				return GlobalDefs.ERR_NODATA;
+			}
+		} catch (Exception e) {
+			return GlobalDefs.ERR_NODATA;
+		}
+		
+		k = 1;
+		j = 0;
+		qflag = 0;
+		while (k < sno && j < l) {
+			if (pfldval.charAt(j) == '"') {
+				qflag++;
+				if (qflag == 2) {
+					qflag = 0;
+				}
+			}
+			
+			if (qflag == 0 && pfldval.charAt(j) == ',') {
+				k++;
+			}
+			
+			j++;
+		}
+		
+		if (k < sno || j > l) {
+			return GlobalDefs.ERR_NODATA;
+		}
+		
+		k = j;
+		qflag = 0;
+		
+		while (k < l) {
+			if (pfldval.charAt(j) == '"') {
+				if (qflag == 2) {
+					qflag = 0;
+				}
+			}
+			
+			if (qflag == 0 && pfldval.charAt(j) == ',') {
+				break;
+			}
+			
+			k++;
+		}
+		
+		Value.append(str);
 	}
 
 	public String strTo16(String s) {
